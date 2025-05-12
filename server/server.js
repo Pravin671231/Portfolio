@@ -1,18 +1,21 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const contactRoutes = require("./routes/contactRoutes");
 
-app.use(cors());
 //middleware
+app.use(cors());
 app.use(express.json());
 
-app.get('/',(req,res)=>{
-    res.send('MERN Portfolio API is running')
-})
+//routes
+app.use("/api", contactRoutes);
 
-const PORT=process.env.PORT||5000
+app.get("/", (req, res) => {
+  res.send("MERN Portfolio API is running");
+});
 
-app.listen(PORT,()=>{
-    console.log(`Server listening on port ${PORT}`);
-    
-})
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
