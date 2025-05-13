@@ -4,21 +4,24 @@ require("dotenv").config();
 const cors = require("cors");
 const app = express();
 const contactRoutes = require("./routes/contactRoutes");
-
+const projectRoutes = require("./routes/projectRoutes");
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB connection error", err));
 
 //middleware
-app.use(cors({
-  origin:"http://localhost:5173", // frontend port
-  methods:["POST"]
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // frontend port
+    methods: ["POST"],
+  })
+);
 app.use(express.json());
 
 //routes
 app.use("/api", contactRoutes);
+app.use("/api/projects", projectRoutes);
 
 app.get("/", (req, res) => {
   res.send("MERN Portfolio API is running");
