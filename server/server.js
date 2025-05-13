@@ -11,7 +11,10 @@ mongoose
   .catch((err) => console.error("MongoDB connection error", err));
 
 //middleware
-app.use(cors());
+app.use(cors({
+  origin:"http://localhost:5173", // frontend port
+  methods:["POST"]
+}));
 app.use(express.json());
 
 //routes
