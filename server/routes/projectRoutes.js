@@ -13,4 +13,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+// POST a new project
+router.post("/", async (req, res) => {
+  try {
+    const project = new Project(req.body);
+    await project.save();
+    res.status(201).json({ message: "Project created" });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ error: "Failed to create project" });
+  }
+});
+
 module.exports = router;

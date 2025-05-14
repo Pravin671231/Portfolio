@@ -17,7 +17,7 @@ export default function Projects() {
 
       <div className="row">
         {projects.map((project, id) => (
-          <div className="col-md-4 mb-4">
+          <div className="col-md-4 mb-4" key={id}>
             <div className="card h-100 shodow-sm">
               <img
                 src={project.imageUrl}
