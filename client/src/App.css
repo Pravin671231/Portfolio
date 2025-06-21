@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+:root {
+  --bg-color: #fbd259;
+  --bg-header: #fff;
+  --text: #1f2622;
+  --text-light: #ccc;
+  --text-hover: #ccc;
+  --text-dark: #000;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+* {
+  font-family: "Open Sans", sans-serif;
+}
+section {
+  background: var(--bg-color);
+  color: var(--text);
+  height: 100%;
+  width: 100%;
+}
+header {
+  font-family: "Open Sans", sans-serif;
+  background: var(--bg-header);
+  z-index: 100;
+  color: var(--text);
+}
+
+.navbar-brand {
+  color: var(--text-dark) !important;
+  font-weight: bolder;
+  font-size: 24px !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: var(--text-hover) !important;
+  cursor: pointer;
+}
+.nav-item {
+  background-color: white;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link {
+  color: #020024 !important;
+  padding: 0.5rem 1rem;
+}
+
+.nav-item:hover {
+  background-color: #f0f0f0;
+}
+.nav-link.active {
+  border-bottom: 3px solid #28a745;
+  font-weight: bold;
+}
+
+/* Responvise  */
+
+@media (max-width: 576px) {
+  .home-section h3,
+  .home-section h1 {
+    font-size: 50px;
+  }
+  .home-section p {
+    font-size: 0.5rem;
+  }
+}
