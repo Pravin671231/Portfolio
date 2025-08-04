@@ -7,6 +7,7 @@
   --text-light: #ccc;
   --text-hover: #ccc;
   --text-dark: #000;
+  --text-title: #198754;
 }
 
 html {
@@ -15,12 +16,7 @@ html {
 * {
   font-family: "Open Sans", sans-serif;
 }
-section {
-  background: var(--bg-color);
-  color: var(--text);
-  height: 100%;
-  width: 100%;
-}
+
 header {
   font-family: "Open Sans", sans-serif;
   background: var(--bg-header);
@@ -38,7 +34,7 @@ header {
 }
 
 .navbar-brand:hover {
-  color: var(--text-hover) !important;
+  color: var(--text-title) !important;
   cursor: pointer;
 }
 .nav-item {
@@ -72,3 +68,73 @@ header {
     font-size: 0.5rem;
   }
 }
+
+/* Contact */
+.contact-section {
+  background-color: #fdfdfd;
+}
+
+.contact-section h2 {
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+}
+
+button svg {
+  vertical-align: middle;
+}
+
+/* Project */
+.projects-section {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.projects-section h2 {
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+}
+
+/* Project card */
+.project-card {
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-title {
+  color: #333;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  transition: transform 0.2s ease-in-out;
+}
+/* Home */
+
+.section-bg {
+  background-color:var(--bg-color);
+}
+
+.project-card {
+  background-color: #fff;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.project-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.project-card .card-title {
+  color: #1f2622;
+}
+
+.project-card .card-text {
+  color: #555;
+}
+
+.project-card .btn {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+

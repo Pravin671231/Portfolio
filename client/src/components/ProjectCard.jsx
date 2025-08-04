@@ -1,87 +1,132 @@
-import { Badge, Button, Card, Col, Row } from "react-bootstrap";
-import { useProjectContext } from "../context/ProjectContext";
-import Image from "./Image";
-// import ProjectModel from "./ProjectModel";
-
+import { useState } from "react";
+import {
+  Badge,
+  Button,
+  Card,
+  Col,
+  Container,
+  Row,
+  Carousel,
+} from "react-bootstrap";
+// import { useProjectContext } from "../context/ProjectContext"; // Make sure this provides your projects array
+import Image from "./Image"; // Your custom Image component or use <img>
+import { projects } from "../Data/ProjectData";
 const ProjectCard = () => {
-  const { projects } = useProjectContext();
+  // const { projects } = useProjectContext();
+  const [selectedProject, setSelectedProject] = useState(
+    projects.length > 0 ? projects[0] : null
+  );
 
   return (
-    <>
-      <Row>
-        {projects.map((project, id) => (
-          <Col
-            md={4}
-            key={id}
-            className="mb-4 justify-content-between"
-            // onClick={() => setSelectedProject(project)}
-            style={{ cursor: "pointer" }}
-          >
-            <Card className="h-100 shadow p-3 glass-card text-white">
-              {/* <Card.Img
-                variant="top"
-                src={project.imageUrl}
-                alt={project.title}
-                style={{
-                  height: "250px",
-                  objectFit: "cover",
-                  borderRadius: "10px",
-                }}
-              /> */}
-              <Image
-                src={project.imageUrl}
-                alt={project.title}
-                style={{
-                  height: "200px",
-                  width: "100%",
-                  objectFit: "contain",
-                  borderRadius: "10px",
-                  border: "2px solid black",
-                }}
-              />
-              <Card.Body>
-                <Card.Title className="text-dark fw-bolder">
+    <Container className="my-5">
+      <Row className="g-4 align-items-start">
+        {/* Left Column - Sticky Carousel or placeholder */}
+        <Col
+          md={6}
+          className="text-center"
+          style={{ position: "sticky", top: "100px", alignSelf: "flex-start" }}
+        >
+          {selectedProject ? (
+            <>
+              <h5 className="mb-3 fw-semibold">{selectedProject.title}</h5>
+
+              {selectedProject.imageUrls &&
+              selectedProject.imageUrls.length > 0 ? (
+                <Carousel
+                  key={selectedProject.title}
+                  variant="dark"
+                  indicators
+                  interval={null}
+                >
+                  {selectedProject.imageUrls.map((img, idx) => (
+                    <Carousel.Item key={idx}>
+                      <Image
+                        src={img}
+                        alt={`${selectedProject.title} - image ${idx + 1}`}
+                        loading="lazy"
+                        style={{
+                          width: "100%",
+                          maxHeight: "400px",
+                          objectFit: "cover",
+                          borderRadius: "8px",
+                        }}
+                      />
+                    </Carousel.Item>
+                  ))}
+                </Carousel>
+              ) : (
+                <p className="text-muted">No images uploaded yet.</p>
+              )}
+            </>
+          ) : (
+            <p className="text-muted">Click a project to preview images</p>
+          )}
+        </Col>
+
+        {/* Right Column - Project List */}
+        <Col md={6}>
+          {projects.map((project, id) => (
+            <Card
+              key={id}
+              className={`shadow-sm border-0 mb-4 h-100 ${
+                selectedProject?.title === project.title
+                  ? "border-success border-2"
+                  : ""
+              }`}
+              onClick={() => setSelectedProject(project)}
+              style={{ cursor: "pointer" }}
+            >
+              <Card.Body className="p-4">
+                <Card.Title className="fw-bold text-dark mb-2">
                   {project.title}
                 </Card.Title>
-                <div className="text-dark py-3">{project.description}</div>
-                <div className="d-flex flex-wrap">
-                  {project.techStack.map((tech, id) => (
+                <Card.Text
+                  className="text-muted"
+                  style={{ fontSize: "0.95rem" }}
+                >
+                  {project.description}
+                </Card.Text>
+
+                <div className="d-flex flex-wrap mt-3">
+                  {project.techStack.map((tech, idx) => (
                     <Badge
-                      key={id}
+                      key={idx}
                       bg="success"
-                      text="white"
                       className="me-2 mb-2"
+                      style={{ fontSize: "0.75rem", padding: "6px 10px" }}
                     >
                       {tech}
                     </Badge>
                   ))}
                 </div>
               </Card.Body>
-              <Card.Footer className="bg-transparent border-top-0">
+
+              <Card.Footer className="bg-light border-0 px-4 pb-4 d-flex justify-content-between">
                 <Button
-                  variant="light"
+                  variant="outline-dark"
                   size="sm"
-                  className="me-2"
                   href={project.githubLink}
                   target="_blank"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   GitHub
                 </Button>
+
                 <Button
-                  variant="danger"
+                  variant="success"
                   size="sm"
                   href={project.liveLink}
                   target="_blank"
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  Live
+                  Live Demo
                 </Button>
               </Card.Footer>
             </Card>
-          </Col>
-        ))}
+          ))}
+        </Col>
       </Row>
-      {/* <ProjectModel /> */}
-    </>
+    </Container>
   );
 };
 

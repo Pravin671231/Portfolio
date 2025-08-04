@@ -1,12 +1,12 @@
 import { useState } from "react";
-import axios from "axios";
 import { Container, Form, Button, Alert, Row, Col } from "react-bootstrap";
-import {
-  FaEnvelope,
+ import {
+  FaEnvelope, 
   FaMapMarkerAlt,
   FaLinkedin,
   FaGithub,
   FaPhoneAlt,
+  FaWhatsapp,
 } from "react-icons/fa";
 import api from "../api";
 
@@ -19,7 +19,7 @@ export default function Contact() {
   const [status, setStatus] = useState(null);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
@@ -31,10 +31,7 @@ export default function Contact() {
       if (res.status === 201) {
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
-
-        setTimeout(() => {
-          setStatus(null);
-        }, 3000);
+        setTimeout(() => setStatus(null), 3000);
       }
     } catch (error) {
       setStatus("error");
@@ -42,45 +39,47 @@ export default function Contact() {
   };
 
   return (
-    <section className="vh-100">
-      <Container id="contact" className="py-5">
-        <h2 className="text-center mb-4 text-uppercase py-3 fw-bolder">
+    <>
+    <Container className="py-5">
+        <h2 className="text-center text-uppercase fw-bold text-success mb-5">
           Contact Me
         </h2>
-        <Row>
-          {/* Contact Info and Social Links */}
+        <Row className="g-4">
+          {/* Left: Contact Info */}
           <Col md={6}>
             <div className="mb-4">
-              <h5>Get in Touch</h5>
+              <h5 className="fw-bold mb-3">Get in Touch</h5>
               <p>
                 <a
-                  href="mailto:pravinkumar671231@gmail.com?subject=Contact%20from%20Portfolio&body=Hello%20Pravin,"
+                  href="mailto:pravinkumar671231@gmail.com"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="text-decoration-none text-dark d-flex align-items-center"
                 >
                   <FaEnvelope className="me-2" /> pravinkumar671231@gmail.com
                 </a>
               </p>
-              <p>
+              <p className="d-flex align-items-center">
                 <FaPhoneAlt className="me-2" /> +91 8220839631
               </p>
-              <p>
-                <FaMapMarkerAlt className="me-2" /> Coimbatore, TamilNadu
+              <p className="d-flex align-items-center">
+                <FaMapMarkerAlt className="me-2" /> Coimbatore, Tamil Nadu
               </p>
             </div>
-            {/* Contact Form */}
 
             <div>
-              <h5 className="fs-4">Follow Me</h5>
-              <div className="d-flex gap-3">
+              <h5 className="fw-bold mb-3">Follow Me</h5>
+              <div className="d-flex gap-3 flex-wrap">
                 <Button
                   as="a"
                   href="https://linkedin.com/in/pravinkumar31"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white text-black fw-bolder"
+                  variant="outline-success"
+                  className="d-flex fw-bold align-items-center gap-2"
                 >
-                  <FaLinkedin className="me-2" /> LinkedIn
+                  <FaLinkedin />
+                  LinkedIn
                 </Button>
 
                 <Button
@@ -88,28 +87,58 @@ export default function Contact() {
                   href="https://github.com/Pravin671231"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white text-black fw-bolder"
+                  variant="outline-dark"
+                  className="d-flex fw-bold align-items-center gap-2"
                 >
-                  <FaGithub className="me-2" /> GitHub
+                  <FaGithub />
+                  GitHub
+                </Button>
+
+                <Button
+                  as="a"
+                  href="https://wa.me/918220839631" // WhatsApp link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="outline-success"
+                  className="d-flex fw-bold align-items-center gap-2"
+                >
+                  <FaWhatsapp />
+                  WhatsApp
+                </Button>
+
+                <Button
+                  as="a"
+                  href="tel:+918220839631" // Phone call link (with + and country code)
+                  variant="outline-primary"
+                  className="d-flex fw-bold align-items-center gap-2"
+                >
+                  <FaPhoneAlt />
+                  Call
                 </Button>
               </div>
             </div>
           </Col>
 
+          {/* Right: Contact Form */}
           <Col md={6}>
             {status === "success" && (
-              <Alert variant="success">Message sent successfully!</Alert>
+              <Alert variant="success" className="mb-4">
+                Message sent successfully!
+              </Alert>
             )}
             {status === "error" && (
-              <Alert variant="danger">Something went wrong. Try again.</Alert>
+              <Alert variant="danger" className="mb-4">
+                Something went wrong. Please try again.
+              </Alert>
             )}
 
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} noValidate>
               <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
                   name="name"
+                  placeholder="Enter your name"
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -121,18 +150,20 @@ export default function Contact() {
                 <Form.Control
                   type="email"
                   name="email"
+                  placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleChange}
                   required
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formMessage">
+              <Form.Group className="mb-4" controlId="formMessage">
                 <Form.Label>Message</Form.Label>
                 <Form.Control
                   as="textarea"
-                  rows={4}
+                  rows={5}
                   name="message"
+                  placeholder="Write your message here..."
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -142,7 +173,7 @@ export default function Contact() {
               <Button
                 variant="success"
                 type="submit"
-                className="fs-6"
+                className="px-4"
                 disabled={status === "loading"}
               >
                 {status === "loading" ? "Sending..." : "Send Message"}
@@ -151,6 +182,7 @@ export default function Contact() {
           </Col>
         </Row>
       </Container>
-    </section>
+    </>
+    
   );
 }

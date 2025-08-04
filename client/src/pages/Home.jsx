@@ -1,61 +1,138 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { useEffect, useRef } from "react";
+import About from "./About";
+import Projects from "./Projects";
+import Contact from "./Contact";
+import Header from "../components/Header";
 import { Typewriter } from "react-simple-typewriter";
-import homeImg from "../assets/home.webp";
 import { FaArrowRight } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Button, Container, Row, Col, Image } from "react-bootstrap";
+import homeImg from "../assets/home.webp";
+
 export default function Home() {
-  const navigate = useNavigate();
+  const homeRef = useRef(null);
+  const aboutRef = useRef(null);
+  const projectsRef = useRef(null);
+  const contactRef = useRef(null);
+
+  const scrollToSection = (id) => {
+    const refs = {
+      home: homeRef,
+      about: aboutRef,
+      projects: projectsRef,
+      contact: contactRef,
+    };
+
+    refs[id]?.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    if (window.location.hash) {
+      history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+      );
+    }
+  }, []);
+
   return (
-    <section className="home-section d-flex align-items-center">
-      <Container className="vh-100 d-flex align-items-center p-4">
-        <Row className="w-100 justify-content-center align-items-center text-center">
-          <Col
-            xs={12}
-            md={6}
-            className="mb-4 mb-md-0 d-flex justify-content-center"
-          >
-            <img
-              src={homeImg}
-              alt="Home"
-              className="img-fluid w-100"
-              style={{
-                maxWidth: "450px",
-                width: "100%",
-                height: "auto",
-                objectFit: "contain",
-              }}
-            />
-          </Col>
-          <Col xs={12} md={6} className="text-center text-md-start">
-            <h3 className="fs-1 fw-bold mb-2">
-              <span className="text-success">I'm</span> PravinKumar K
-            </h3>
-            <h1 className="mb-3 text-success">
-              <Typewriter
-                words={["MERN Stack Developer", "Full Stack Developer"]}
-                loop={true}
-                cursor
-                cursorStyle="|"
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1000}
+    <>
+      <Header scrollToSection={scrollToSection} />
+      {/* Hero Section */}
+      <section
+        ref={homeRef}
+        id="home"
+        className="section-bg d-flex align-items-center"
+        style={{ minHeight: "100vh", paddingTop: "80px" }}
+      >
+        <Container>
+          <Row className="align-items-center">
+            {/* Image Column */}
+            <Col md={5} className="text-center">
+              <Image
+                src={homeImg}
+                alt="Developer illustration"
+                fluid
+                className="hero-image"
               />
-            </h1>
-            <p className="h5 text-muted mb-4 ">
-              A Full Developer passionate about building user-friendly and
-              interactive web apps. With a touch of creativity and efficiency, I
-              turn ideas into smooth digital experiences
-            </p>
-            <Button
-              variant="success"
-              className="fs-5 fw-bold  px-4 py-2"
-              onClick={() => navigate("/projects")}
-            >
-              View Projects <FaArrowRight className="ms-2" />
-            </Button>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+            </Col>
+            {/* Text Column */}
+            <Col md={7} className="text-center text-md-start mb-4 mb-md-0">
+              <h1 className="display-5 fw-bold mb-3">
+                👋Hi, I’m <span className="text-success">PravinKumar</span>
+              </h1>
+
+              <h2 className="text-success text-center mb-4" style={{ fontSize: "1.75rem" }}>
+                <Typewriter
+                  words={[
+                    "MERN Stack Developer",
+                    "Full Stack Developer",
+                    "Problem Solver",
+                  ]}
+                  loop
+                  cursor
+                  cursorStyle="|"
+                  typeSpeed={80}
+                  deleteSpeed={50}
+                  delaySpeed={1500}
+                />
+              </h2>
+
+              <p className="lead mb-4" style={{ maxWidth: "650px" }}>
+                I'm a full-stack developer with a passion for building fast,
+                scalable, and user-friendly applications using the MERN stack.
+                From idea to deployment, I love creating clean solutions to
+                real-world problems.
+              </p>
+
+              <div className="d-flex flex-wrap gap-3">
+                <Button
+                  variant="success"
+                  className="fs-5 fw-bold px-4 py-2"
+                  onClick={() => scrollToSection("projects")}
+                >
+                  View Projects <FaArrowRight className="ms-2" />
+                </Button>
+
+                <Button
+                  variant="outline-dark"
+                  className="fs-5 fw-semibold px-4 py-2"
+                  onClick={() => scrollToSection("contact")}
+                >
+                  Get in Touch
+                </Button>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      {/* About Section */}
+      <section
+        ref={aboutRef}
+        id="about"
+        style={{ minHeight: "100vh", paddingTop: "80px" }}
+      >
+        <About />
+      </section>
+      {/* Projects Section */}
+      <section
+        ref={projectsRef}
+        id="projects"
+        style={{ minHeight: "100vh", paddingTop: "80px" }}
+
+      >
+        <Projects />
+      </section>
+      {/* Contact Section */}
+      <section
+        ref={contactRef}
+        id="contact"
+        style={{ minHeight: "100vh", paddingTop: "80px" }}
+        className="section-bg"
+
+      >
+        <Contact />
+      </section>
+    </>
   );
 }

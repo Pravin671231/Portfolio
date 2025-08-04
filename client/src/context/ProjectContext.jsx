@@ -1,25 +1,17 @@
-import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
-import api from "../api";
-
+import { createContext, useContext, useState } from "react";
+// import projectData from "../Data/ProjectData";
 const ProjectContext = createContext();
 
 export const useProjectContext = () => useContext(ProjectContext);
 
 export const ProjectProvider = ({ children }) => {
-  const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  useEffect(() => {
-    api
-      .get("/projects")
-      .then((res) => setProjects(res.data))
-      .catch((err) => console.error("Failed to load Projects", err));
-  }, []);
+  const [projects] = useState();
 
   return (
     <ProjectContext.Provider
-      value={{ projects, setProjects, selectedProject, setSelectedProject }}
+      value={{ projects, selectedProject, setSelectedProject }}
     >
       {children}
     </ProjectContext.Provider>
