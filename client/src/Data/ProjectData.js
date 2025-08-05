@@ -39,7 +39,7 @@ export const projects = [
       "A full‑stack MERN portfolio designed to showcase projects seamlessly. The frontend is built with React, and the backend using Express.js handles contact form submissions only. Projects are displayed using static frontend data (not stored in a database). The UI is styled with React‑Bootstrap for a clean, responsive look.",
     techStack: ["React", "Node.js", "MongoDB", "Bootstrap"],
     githubLink: "https://github.com/Pravin671231/Portfolio.git",
-    liveLink: "https://plantid.czar.com",
+    liveLink: "https://pravin-mern.netlify.app/",
     imageUrls: [Portfolio_home, Portfolio_tech, Portfolio_project],
   },
 ];
