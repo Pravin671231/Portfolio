@@ -8,11 +8,9 @@ import {
   Row,
   Carousel,
 } from "react-bootstrap";
-// import { useProjectContext } from "../context/ProjectContext"; // Make sure this provides your projects array
-import Image from "./Image"; // Your custom Image component or use <img>
+import Image from "./Image";
 import { projects } from "../Data/ProjectData";
 const ProjectCard = () => {
-  // const { projects } = useProjectContext();
   const [selectedProject, setSelectedProject] = useState(
     projects.length > 0 ? projects[0] : null
   );
@@ -28,7 +26,12 @@ const ProjectCard = () => {
         >
           {selectedProject ? (
             <>
-              <h5 className="mb-3 fs-3 fw-bold" style={{letterSpacing:"0.5px"}} >{selectedProject.title}</h5>
+              <h5
+                className="mb-3 fs-3 fw-bold"
+                style={{ letterSpacing: "0.5px" }}
+              >
+                {selectedProject.title}
+              </h5>
 
               {selectedProject.imageUrls &&
               selectedProject.imageUrls.length > 0 ? (
@@ -49,8 +52,8 @@ const ProjectCard = () => {
                           maxHeight: "400px",
                           objectFit: "cover",
                           borderRadius: "8px",
-                          border:"2px solid #198754",
-                          padding:"12px"
+                          border: "2px solid #198754",
+                          padding: "12px",
                         }}
                       />
                     </Carousel.Item>
@@ -83,7 +86,7 @@ const ProjectCard = () => {
                   {project.title}
                 </Card.Title>
                 <Card.Text
-                  className="text-muted"
+                  className="text-black"
                   style={{ fontSize: "0.95rem" }}
                 >
                   {project.description}

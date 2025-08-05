@@ -32,19 +32,19 @@ export default function About() {
             <h2 className="fw-bold text-uppercase mb-3 text-md-start text-center">
               About Me
             </h2>
-            <p className="lead text-muted">
+            <p className="lead text-black">
               Hi, I'm <strong>Pravinkumar</strong> — a dedicated full-stack
               developer with a passion for building intuitive, high-performance
               web applications.
             </p>
-            <p className="text-muted">
+            <p className="text-black">
               I specialize in the <strong>MERN stack</strong> and have strong
               experience in designing robust APIs, crafting responsive front-end
               interfaces, and solving complex backend challenges. I'm constantly
               learning and enjoy contributing to real-world projects that make a
               difference.
             </p>
-            <p className="text-muted">
+            <p className="text-black">
               Beyond coding, I'm passionate about creating seamless user
               experiences, optimizing performance, and developing scalable,
               production-ready solutions that grow with real-world demands.

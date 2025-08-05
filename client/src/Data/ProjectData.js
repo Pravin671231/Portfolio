@@ -36,7 +36,7 @@ export const projects = [
   {
     title: "Portfolio",
     description:
-      "A full-stack MERN portfolio to showcase projects. Built with React on the frontend using useContext for global state, and Express.js on the backend for API handling and image uploads. Projects are stored in MongoDB, and the UI is styled with Bootstrap.",
+      "A full‑stack MERN portfolio designed to showcase projects seamlessly. The frontend is built with React, and the backend using Express.js handles contact form submissions only. Projects are displayed using static frontend data (not stored in a database). The UI is styled with React‑Bootstrap for a clean, responsive look.",
     techStack: ["React", "Node.js", "MongoDB", "Bootstrap"],
     githubLink: "https://github.com/Pravin671231/Portfolio.git",
     liveLink: "https://plantid.czar.com",

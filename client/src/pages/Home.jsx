@@ -81,7 +81,7 @@ export default function Home() {
                 />
               </h2>
 
-              <p className="lead mb-4" style={{ maxWidth: "650px" }}>
+              <p className="lead text-black mb-4" style={{ maxWidth: "650px" }}>
                 I'm a full-stack developer with a passion for building fast,
                 scalable, and user-friendly applications using the MERN stack.
                 From idea to deployment, I love creating clean solutions to
@@ -114,7 +114,6 @@ export default function Home() {
         ref={aboutRef}
         id="about"
         style={{ minHeight: "100vh", paddingTop: "80px" }}
-        // className="section-bg-dark"
       >
         <About />
       </section>
