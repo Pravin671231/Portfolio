@@ -8,6 +8,7 @@
   --text-hover: #ccc;
   --text-dark: #000;
   --text-title: #198754;
+  --bg-second: #e6e8ea;
 }
 
 html {
@@ -112,6 +113,9 @@ button svg {
 
 .section-bg {
   background-color:var(--bg-color);
+}
+.section-bg-dark {
+  background-color:var(--bg-second);
 }
 
 .project-card {

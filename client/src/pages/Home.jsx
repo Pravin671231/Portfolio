@@ -62,7 +62,10 @@ export default function Home() {
                 👋Hi, I’m <span className="text-success">PravinKumar</span>
               </h1>
 
-              <h2 className="text-success text-center mb-4" style={{ fontSize: "1.75rem" }}>
+              <h2
+                className="text-success text-center mb-4"
+                style={{ fontSize: "1.75rem" }}
+              >
                 <Typewriter
                   words={[
                     "MERN Stack Developer",
@@ -111,6 +114,7 @@ export default function Home() {
         ref={aboutRef}
         id="about"
         style={{ minHeight: "100vh", paddingTop: "80px" }}
+        // className="section-bg-dark"
       >
         <About />
       </section>
@@ -119,7 +123,7 @@ export default function Home() {
         ref={projectsRef}
         id="projects"
         style={{ minHeight: "100vh", paddingTop: "80px" }}
-
+        className="section-bg-dark"
       >
         <Projects />
       </section>
@@ -129,7 +133,6 @@ export default function Home() {
         id="contact"
         style={{ minHeight: "100vh", paddingTop: "80px" }}
         className="section-bg"
-
       >
         <Contact />
       </section>

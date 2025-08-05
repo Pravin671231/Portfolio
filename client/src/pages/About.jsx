@@ -89,8 +89,8 @@ export default function About() {
             <Row>
               {skills.map((skill) => (
                 <Col md={6} key={skill.name} className="mb-3">
-                  <ListGroup variant="flush">
-                    <ListGroup.Item className="d-flex align-items-center justify-content-between">
+                  <ListGroup>
+                    <ListGroup.Item className="d-flex align-items-center justify-content-between  border-0">
                       <div className="d-flex align-items-center">
                         <Image
                           src={skill.img}

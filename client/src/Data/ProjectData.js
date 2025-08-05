@@ -4,12 +4,15 @@ import PhoneShop_order from "./projectImages/PhoneStore-order.png";
 import PhoneShop_payment from "./projectImages/PhoneStore-payment.png";
 import MovieNest_home from "./projectImages/MovieNest-home.png";
 import MovieNest_detail from "./projectImages/MovieNest-detail.png";
+import Portfolio_home from "./projectImages/Portfolio-home.png";
+import Portfolio_tech from "./projectImages/Portfolio-tech.png";
+import Portfolio_project from "./projectImages/Portfolio-project.png";
 
 export const projects = [
   {
     title: "PhoneShop E-commerce",
     description:
-      "An e-commerce web app for browsing and purchasing mobile phones. Built with a Node.js backend, Express server, and MongoDB database.",
+      "A full-stack e-commerce web application for browsing and purchasing mobile phones. Built with a Node.js backend, Express server, and MongoDB database for robust data management. The frontend includes Redux for state management, enabling efficient handling of global state such as the shopping cart and user information. Key data like cart items and userInfo are persisted using localStorage to enhance user experience and ensure data retention across sessions",
     techStack: ["Node.js", "Express", "MongoDB"],
     githubLink: "https://github.com/user/project-beta",
     liveLink: "https://phonestore-pravin.netlify.app/",
@@ -31,14 +34,12 @@ export const projects = [
   },
 
   {
-    title: "Plant Identifier V2",
-    description: "An app that identifies plants using image upload.",
-    techStack: ["React", "Node.js", "MongoDB"],
-    githubLink: "https://github.com/czar/plant-id",
+    title: "Portfolio",
+    description:
+      "A full-stack MERN portfolio to showcase projects. Built with React on the frontend using useContext for global state, and Express.js on the backend for API handling and image uploads. Projects are stored in MongoDB, and the UI is styled with Bootstrap.",
+    techStack: ["React", "Node.js", "MongoDB", "Bootstrap"],
+    githubLink: "https://github.com/Pravin671231/Portfolio.git",
     liveLink: "https://plantid.czar.com",
-    imageUrls: [
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s",
-      "./projectImage/plant-id/plant-id2.png",
-    ],
+    imageUrls: [Portfolio_home, Portfolio_tech, Portfolio_project],
   },
 ];

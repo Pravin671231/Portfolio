@@ -40,7 +40,7 @@ export default function Contact() {
 
   return (
     <>
-    <Container className="py-5">
+    <Container className="pt-5">
         <h2 className="text-center text-uppercase fw-bold text-success mb-5">
           Contact Me
         </h2>
