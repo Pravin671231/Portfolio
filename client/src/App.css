@@ -10,6 +10,17 @@
   --text-title: #198754;
   --bg-second: #e6e8ea;
 }
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
 html {
   scroll-behavior: smooth;
@@ -112,10 +123,10 @@ button svg {
 /* Home */
 
 .section-bg {
-  background-color:var(--bg-color);
+  background-color: var(--bg-color);
 }
 .section-bg-dark {
-  background-color:var(--bg-second);
+  background-color: var(--bg-second);
 }
 
 .project-card {
@@ -141,4 +152,3 @@ button svg {
   font-size: 0.85rem;
   font-weight: 600;
 }
-
