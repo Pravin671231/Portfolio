@@ -153,3 +153,34 @@ button svg {
   font-size: 0.85rem;
   font-weight: 600;
 }
+
+/* Thin scrollbar styling */
+.scrollable-project-list {
+  scrollbar-width: thin;
+  scrollbar-color: #198754 #f1f1f1;
+}
+
+.scrollable-project-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-project-list::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 8px;
+}
+
+.scrollable-project-list::-webkit-scrollbar-thumb {
+  background-color: #198754; 
+  border-radius: 8px;
+  border: 1px solid #f1f1f1;
+}
+
+@media (max-width: 991.98px) {
+  .scrollable-project-list {
+    max-height: 250px; /* roughly fits 1 card */
+  }
+
+  .scrollable-project-list .project-card {
+    min-height: 100%;
+  }
+}

@@ -52,7 +52,7 @@ export default function About() {
             {/* Resume + Social Links */}
             <div className="mt-4 d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
               {/* Download Resume Button */}
-              <a href="/resume.pdf" download className="btn btn-success px-4">
+              <a href="/Resume.pdf" download className="btn btn-success px-4">
                 Download Resume
               </a>
 
