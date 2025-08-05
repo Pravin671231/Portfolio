@@ -12,7 +12,7 @@ mongoose
 //middleware
 app.use(
   cors({
-    origin: "*", // frontend port
+    origin: "https://pravin-mern.netlify.app/", // frontend port
     methods: ["POST"],
   })
 );
