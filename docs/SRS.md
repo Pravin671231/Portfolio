@@ -10,14 +10,16 @@ Content (project case studies, bio copy, certifications, testimonials) is placeh
 
 ## 2. Tech Stack
 
-| Concern | Technology |
-|---|---|
-| Framework | Next.js (App Router), TypeScript |
-| Styling | Tailwind CSS, plain CSS for gradients/glows/hover micro-interactions |
-| Component animation | Framer Motion |
-| Scroll-driven / pinned animation | GSAP + ScrollTrigger |
-| Smooth scrolling | Lenis (synced to GSAP's ticker) |
-| Icons | Lucide React |
+| Concern | Technology | Verified stable version (Aug 2026) |
+|---|---|---|
+| Framework | Next.js (App Router), TypeScript | Next.js 16.3.x, TypeScript ^5 (resolves 5.9.x — confirmed by an actual `create-next-app@latest` run; its template hasn't moved to TS 6/7 yet despite both existing on npm) |
+| Styling | Tailwind CSS, plain CSS for gradients/glows/hover micro-interactions | Tailwind CSS 4.3.x — CSS-first config (`@theme` in `globals.css`), not a JS config file |
+| Component animation | **Motion** (formerly Framer Motion) | `motion` ^12, imported from `motion/react` — `framer-motion` is a deprecated compatibility alias, do not install it new |
+| Scroll-driven / pinned animation | GSAP + ScrollTrigger | GSAP 3.15.x — fully free as of April 2025, including ScrollTrigger and every plugin |
+| Smooth scrolling | Lenis (synced to GSAP's ticker) | `lenis` 1.3.x (package renamed from `@studio-freight/lenis`) |
+| Icons | Lucide React | latest |
+
+Runtime: Node.js Active LTS (24.x) for local dev and CI. Package versions above drift — re-verify before install rather than trusting this table indefinitely.
 
 ## 3. Site Structure
 
@@ -95,7 +97,7 @@ All of the following exist as real, functional sections wired into the page, usi
 - **NFR-1 Responsive:** Full functional parity across mobile (~375px), tablet (~768px), and desktop (~1440px) viewport widths; complex desktop-only effects (pinned horizontal scroll, custom cursor, strong parallax) degrade gracefully rather than breaking layout on smaller/touch viewports.
 - **NFR-2 Reduced motion:** Every animation system respects `prefers-reduced-motion: reduce` with a documented static/instant fallback (see FR sections above); no GSAP instance is ever created when reduced motion is active.
 - **NFR-3 Performance:** No continuous full-screen particle/3D backgrounds; background motion limited to 2–3 slow-moving gradient blobs at low opacity (0.03–0.08). `next/image` used with explicit sizing to avoid layout shift (CLS).
-- **NFR-4 Build correctness:** `next build` completes with zero TypeScript and zero ESLint errors; all GSAP/Framer Motion files are correctly marked as Client Components.
+- **NFR-4 Build correctness:** `next build` completes with zero TypeScript and zero ESLint errors; all GSAP/Motion files are correctly marked as Client Components. Enforced automatically by CI (`.github/workflows/ci.yml`, set up in M0) on every push/PR to `main`, not just checked manually before merge.
 - **NFR-5 Content integrity:** No fabricated external links (project repo/live URLs use `#` placeholders where no real link exists); placeholder testimonials read as obviously placeholder rather than fabricated realistic endorsements.
 
 ## 7. Data Requirements

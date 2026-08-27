@@ -2,20 +2,25 @@
 
 Ready-to-create GitHub issues for `Pravin671231/Portfolio`, grouped by milestone (see [MILESTONES.md](./MILESTONES.md)). Each entry can be created directly via `gh issue create --title "..." --body "..." --milestone "..." --label "..."`.
 
-Suggested label set: `setup`, `primitive`, `hook`, `data`, `section`, `animation`, `gsap`, `framer-motion`, `api`, `docs`, `polish`, `a11y`, `phase-2`.
+Suggested label set: `setup`, `ci`, `primitive`, `hook`, `data`, `section`, `animation`, `gsap`, `motion`, `api`, `docs`, `polish`, `a11y`, `phase-2`.
 
 ---
 
 ## Milestone: M0 — Scaffold & Core Primitives
 
 ### 1. Scaffold Next.js project with TypeScript, Tailwind, App Router
-- **Description:** Run `create-next-app` in the repo root with TypeScript, Tailwind, App Router, `src/` directory, ESLint, and `@/*` import alias. Install `framer-motion`, `gsap`, `lenis`, `lucide-react`, `clsx`, `tailwind-merge`. Add `.env.example` documenting the optional `GITHUB_TOKEN`.
+- **Description:** Run `create-next-app` in the repo root with TypeScript, Tailwind, App Router, `src/` directory, ESLint, and `@/*` import alias. Install `motion`, `gsap`, `lenis`, `lucide-react`, `clsx`, `tailwind-merge`. Add `.env.example` documenting the optional `GITHUB_TOKEN`.
 - **Acceptance criteria:** `npm run dev` boots the default page with no errors; all listed dependencies present in `package.json`; `.env.example` committed, `.env.local` gitignored.
 - **Labels:** `setup`
 
+### 1a. Set up CI pipeline (GitHub Actions)
+- **Description:** Add `.github/workflows/ci.yml` running on `push` to `main` and on every `pull_request`: checkout → `actions/setup-node` (Node **24**, Active LTS as of Aug 2026 — re-verify at build time, this drifts, `cache: npm`) → `npm ci` → `npm run lint` → `npx tsc --noEmit` → `npm run build`. No deploy step in this milestone (deploy pipeline, if wanted, is a separate later decision) — this is verification-only CI, matching SRS NFR-4 (build correctness) so every later PR is checked automatically instead of relying on manual `next build` runs. Cache `~/.npm`/`node_modules` via `setup-node`'s built-in npm cache to keep runs fast.
+- **Acceptance criteria:** workflow runs green on a trivial PR against `main`; a deliberately broken build (bad import) or lint error fails the workflow; workflow file references only scripts that exist in `package.json` (`lint`, `build`) plus `tsc --noEmit` for an explicit type-check step independent of the Next.js build cache.
+- **Labels:** `setup`, `ci`
+
 ### 2. Add `lib/utils.ts` and global Tailwind/CSS config
-- **Description:** `cn()` helper (clsx + tailwind-merge); `globals.css` base styles and CSS variables for the color palette/gradients used by `GlowBackground`; Tailwind config extensions (custom colors, any keyframes needed by `FloatingCode`).
-- **Acceptance criteria:** `cn()` importable from `@/lib/utils`; custom Tailwind theme values available in `tailwind.config.ts`.
+- **Description:** `cn()` helper (clsx + tailwind-merge); `globals.css` base styles, the `@theme` block defining custom colors/fonts/radii per `docs/DESIGN-TOKENS.md` (Tailwind v4 CSS-first config — `create-next-app --tailwind` no longer generates a `tailwind.config.ts`), and any keyframes needed by `FloatingCode`.
+- **Acceptance criteria:** `cn()` importable from `@/lib/utils`; custom theme values (colors, fonts) available as Tailwind utility classes via the `@theme` block in `globals.css`.
 - **Labels:** `setup`
 
 ### 3. Build `useReducedMotion`, `useMediaQuery`, `useMousePosition` hooks
@@ -29,29 +34,29 @@ Suggested label set: `setup`, `primitive`, `hook`, `data`, `section`, `animation
 - **Labels:** `data`
 
 ### 5. Build `AnimatedText` primitive
-- **Description:** Word/char stagger text-reveal component (`text`, `mode: 'chars'|'words'`, `trigger: 'mount'|'inView'`, `delay`, `staggerChildren` props); mask + `y: 100%→0%` via Framer Motion variants; reduced-motion fallback is a plain opacity fade with no stagger.
+- **Description:** Word/char stagger text-reveal component (`text`, `mode: 'chars'|'words'`, `trigger: 'mount'|'inView'`, `delay`, `staggerChildren` props); mask + `y: 100%→0%` via Motion variants; reduced-motion fallback is a plain opacity fade with no stagger.
 - **Acceptance criteria:** works standalone with both `mount` and `inView` triggers; visibly degrades correctly under reduced motion.
-- **Labels:** `primitive`, `framer-motion`
+- **Labels:** `primitive`, `motion`
 
 ### 6. Build `ScrollReveal` primitive
 - **Description:** Generic `whileInView` fade/slide wrapper (`opacity 0→1`, `y: 24→0`, `viewport={{once:true, amount:0.2}}`, consistent ease curve). This is the single entrance primitive reused by About and every Phase-2 stub section.
 - **Acceptance criteria:** fires once per mount when scrolled into view; configurable `delay`/`y`/`duration` via props.
-- **Labels:** `primitive`, `framer-motion`
+- **Labels:** `primitive`, `motion`
 
 ### 7. Build `GlowBackground` primitive
-- **Description:** CSS grid pattern + blurred radial-gradient blobs (plain CSS) with a small Framer-Motion-driven mouse-parallax transform (±15–20px, spring-damped) sourced from `useMousePosition`. Reduced motion: parallax locked to zero, gradient/grid still renders statically.
+- **Description:** CSS grid pattern + blurred radial-gradient blobs (plain CSS) with a small Motion-driven mouse-parallax transform (±15–20px, spring-damped) sourced from `useMousePosition`. Reduced motion: parallax locked to zero, gradient/grid still renders statically.
 - **Acceptance criteria:** used by both Hero and Contact; no parallax listener overhead when reduced motion is active.
-- **Labels:** `primitive`, `framer-motion`
+- **Labels:** `primitive`, `motion`
 
 ### 8. Build `MagneticButton` primitive
 - **Description:** Wraps a child button/link; on `mousemove` within bounds, pulls it toward the cursor (clamped 5–10px) via spring-animated transform; resets on `mouseleave`. Disabled entirely (no listeners) on touch-pointer devices and under reduced motion.
 - **Acceptance criteria:** displacement never exceeds the clamp; fully inert (plain button) on touch/reduced-motion.
-- **Labels:** `primitive`, `framer-motion`
+- **Labels:** `primitive`, `motion`
 
 ### 9. Build `CustomCursor` + `CursorContext`
 - **Description:** Fixed-position spring-following cursor dot; `CursorContext` exposes `setCursor(mode)` with modes `default|view|code|talk`; expanded pill/label shown for non-default modes. Mounted once at the root layout. Fully disabled (native cursor restored) on touch-pointer devices and under reduced motion.
 - **Acceptance criteria:** mode switches correctly when hovering elements that call `setCursor`; native cursor is visible and no dot renders on a touch-emulated viewport or with reduced motion active.
-- **Labels:** `primitive`, `framer-motion`, `a11y`
+- **Labels:** `primitive`, `motion`, `a11y`
 
 ### 10. Build `SmoothScrollProvider` (Lenis) and wire into layout
 - **Description:** Mounts Lenis app-wide, syncs its scroll tick with `gsap.ticker`/`ScrollTrigger.update()` so Lenis and ScrollTrigger don't fight each other. Skipped entirely (native scroll) under reduced motion.
@@ -75,7 +80,7 @@ Suggested label set: `setup`, `primitive`, `hook`, `data`, `section`, `animation
 ### 12. Implement Hero section
 - **Description:** Per SRS FR-1 — `GlowBackground` + `AnimatedText` mount-triggered word stagger headline, subtitle fade-in, animated scroll-indicator chevron.
 - **Acceptance criteria:** matches FR-1 behavior and reduced-motion fallback exactly.
-- **Labels:** `section`, `animation`, `framer-motion`
+- **Labels:** `section`, `animation`, `motion`
 
 ### 13. Implement About section
 - **Description:** Per SRS FR-2 — heading/body/portrait staggered in via `ScrollReveal`, fires once at ~30% visibility.
@@ -85,7 +90,7 @@ Suggested label set: `setup`, `primitive`, `hook`, `data`, `section`, `animation
 ### 14. Implement `ProjectCard` and `ProjectPreview`
 - **Description:** Per SRS FR-3 — hover overlay with "VIEW CASE STUDY", tag stagger, sets cursor to `view` mode, links to `/projects/[slug]`.
 - **Acceptance criteria:** matches FR-3; overlay/tag animation only active on hover-capable (non-touch) devices.
-- **Labels:** `section`, `animation`, `framer-motion`
+- **Labels:** `section`, `animation`, `motion`
 
 ### 15. Implement `Projects` horizontal pinned scroll + mobile fallback
 - **Description:** Per SRS FR-4 — GSAP ScrollTrigger pin + scrub at ≥1024px with motion enabled; identical cards rendered as a plain vertical `ScrollReveal` stack otherwise, with zero ScrollTrigger instances created in that branch.
@@ -110,17 +115,17 @@ Suggested label set: `setup`, `primitive`, `hook`, `data`, `section`, `animation
 ### 19. Implement `Github` section UI
 - **Description:** Per SRS FR-6 — animated count-up numbers (fires once in view) fed by `/api/github`; mock/seeded contribution-style grid with staggered entrance, explicitly commented as placeholder data pending real GraphQL integration.
 - **Acceptance criteria:** counters animate once and match live API values; grid renders and staggers in once.
-- **Labels:** `section`, `animation`, `framer-motion`
+- **Labels:** `section`, `animation`, `motion`
 
 ### 20. Implement Contact section
 - **Description:** Per SRS FR-7 — "LET'S / BUILD / IT." character-reveal on scroll-into-view via `AnimatedText`, `MagneticButton`-wrapped primary CTA, cursor `talk` mode, reused `GlowBackground`.
 - **Acceptance criteria:** matches FR-7.
-- **Labels:** `section`, `animation`, `framer-motion`
+- **Labels:** `section`, `animation`, `motion`
 
 ### 21. Wire magnetic buttons and cursor modes across primary CTAs
 - **Description:** Confirm `MagneticButton` and cursor-mode context calls are applied consistently on Contact's CTA, project cards, and GitHub links per SRS FR-8 — not applied broadly to nav links or secondary buttons.
 - **Acceptance criteria:** cursor label swaps correctly across all three interactive contexts (`view`/`code`/`talk`); magnetic effect present only on primary CTAs.
-- **Labels:** `polish`, `framer-motion`
+- **Labels:** `polish`, `motion`
 
 ---
 
@@ -167,9 +172,9 @@ Suggested label set: `setup`, `primitive`, `hook`, `data`, `section`, `animation
 - **Labels:** `polish`
 
 ### 31. Build/type-check clean pass
-- **Description:** `next build` completes with zero TypeScript and zero ESLint errors; confirm every GSAP/Framer Motion file has the correct `'use client'` boundary.
+- **Description:** `next build` completes with zero TypeScript and zero ESLint errors; confirm every GSAP/Motion file has the correct `'use client'` boundary.
 - **Labels:** `polish`
 
 ### 32. Metadata, favicon, and SEO polish
-- **Description:** Add page metadata (title/description/OG tags) in `layout.tsx`, favicon, and any remaining SEO basics.
+- **Description:** Add page metadata (title/description/OG tags) in `layout.tsx`, favicon, and any remaining SEO basics. Source the monogram mark, favicon sizes, and OG image layout from `brand-kit/index.html` (§02 Favicon, §03 Social Share Image) rather than redesigning them here — export real `app/icon.tsx`/`favicon.ico` and an `app/opengraph-image.tsx` (or static PNG) matching that reference.
 - **Labels:** `polish`

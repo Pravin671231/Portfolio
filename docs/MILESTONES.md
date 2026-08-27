@@ -6,11 +6,11 @@ These are written as ready-to-create GitHub Milestone entries for `Pravin671231/
 
 ## M0 — Scaffold & Core Primitives
 
-**Description:** Stand up the Next.js/TypeScript/Tailwind project, install the animation stack (Framer Motion, GSAP, Lenis, Lucide), and build every low-level primitive (hooks, data layer, reusable UI primitives, custom cursor, layout shell) that every later section depends on.
+**Description:** Stand up the Next.js/TypeScript/Tailwind project, install the animation stack (Motion, GSAP, Lenis, Lucide), build every low-level primitive (hooks, data layer, reusable UI primitives, custom cursor, layout shell) that every later section depends on, and wire up a CI pipeline so every subsequent milestone is verified automatically on push/PR.
 
 **Target date:** TBD
 
-**Covers:** project setup, `lib/utils.ts`, global CSS/Tailwind config, `hooks/useReducedMotion.ts`, `hooks/useMediaQuery.ts`, `hooks/useMousePosition.ts`, `data/projects.ts`, `data/skills.ts`, `data/experience.ts`, `data/certifications.ts`, `data/testimonials.ts`, `ui/AnimatedText.tsx`, `ui/ScrollReveal.tsx`, `ui/GlowBackground.tsx`, `ui/MagneticButton.tsx`, `ui/CustomCursor.tsx` + `CursorContext`, `layout/SmoothScrollProvider.tsx`, `layout/Navbar.tsx`, `layout/Footer.tsx`, `app/layout.tsx`, `app/page.tsx` shell.
+**Covers:** project setup, `lib/utils.ts`, global CSS/Tailwind config, `hooks/useReducedMotion.ts`, `hooks/useMediaQuery.ts`, `hooks/useMousePosition.ts`, `data/projects.ts`, `data/skills.ts`, `data/experience.ts`, `data/certifications.ts`, `data/testimonials.ts`, `ui/AnimatedText.tsx`, `ui/ScrollReveal.tsx`, `ui/GlowBackground.tsx`, `ui/MagneticButton.tsx`, `ui/CustomCursor.tsx` + `CursorContext`, `layout/SmoothScrollProvider.tsx`, `layout/Navbar.tsx`, `layout/Footer.tsx`, `app/layout.tsx`, `app/page.tsx` shell, `.github/workflows/ci.yml`.
 
 ---
 

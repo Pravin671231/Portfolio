@@ -1,6 +1,6 @@
 # Design Tokens — Pravin K Portfolio
 
-Reference doc for the visual design system. This is a spec, not code — the Tailwind config setup step (see `docs/ISSUES.md` #2) implements these values into `tailwind.config.ts`/`globals.css`, and `mock-ui/index.html` demonstrates them applied via Tailwind utility classes. Cross-references [SRS.md](./SRS.md) §2 (Tech Stack), §6 NFR-3 (performance ceiling on background motion), and the per-section animation parameters in §4.
+Reference doc for the visual design system. This is a spec, not code — the Tailwind config setup step (see `docs/ISSUES.md` #2) implements these values as an `@theme` block in `globals.css` (Tailwind v4's CSS-first config — there is no `tailwind.config.ts` by default), and `mock-ui/index.html` demonstrates them applied via Tailwind utility classes. Cross-references [SRS.md](./SRS.md) §2 (Tech Stack), §6 NFR-3 (performance ceiling on background motion), and the per-section animation parameters in §4.
 
 ## 1. Color Palette
 
@@ -65,18 +65,18 @@ Tailwind's default 4px-base scale is used as-is (`1`–`96`). Section-level rhyt
 | `--radius-lg` | `1.5rem` | Project preview panels, modals |
 | `--radius-full` | `9999px` | Pills, cursor dot, avatar |
 | `--shadow-glow-sm` | `0 0 24px -8px var(--color-accent-blue)` at low alpha | Hover glow on cards/buttons |
-| `--shadow-glow-lg` | `0 0 120px -20px var(--color-accent-violet)` at low alpha | Ambient section glow |
+| `--shadow-glow-lg` | `0 0 120px -20px var(--color-accent-cyan)` at low alpha | Ambient section glow |
 
 ## 5. Motion (spec for later implementation — this doc does not animate)
 
-Durations/easings referenced by the FR sections in `SRS.md`; consumed by the actual Framer Motion/GSAP code in M1/M2, **not** by `mock-ui/index.html`, which stays static.
+Durations/easings referenced by the FR sections in `SRS.md`; consumed by the actual Motion/GSAP code in M1/M2, **not** by `mock-ui/index.html`, which stays static.
 
 | Token | Value | Used by |
 |---|---|---|
 | `--ease-out-expo` | `cubic-bezier(0.16, 1, 0.3, 1)` | `ScrollReveal`, most entrance animations |
 | `--ease-in-out` | `cubic-bezier(0.65, 0, 0.35, 1)` | Scroll-indicator bob, cursor spring easing reference |
 | `--duration-fast` | `0.2s` | Hover micro-interactions (plain CSS tier) |
-| `--duration-base` | `0.4s` | Component-level Framer Motion transitions |
+| `--duration-base` | `0.4s` | Component-level Motion transitions |
 | `--duration-slow` | `0.8s` | Section entrance reveals |
 | `--duration-float` | `6s–10s` | `FloatingCode` decorative loops (SRS §5) |
 | `--stagger-word` | `0.08s` | `AnimatedText` word mode (Hero) |

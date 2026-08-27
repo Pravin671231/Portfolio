@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brand Kit — Pravin K Portfolio</title>
+<!--
+  Static HTML + Tailwind CSS reference page. Visual-reference only — no exported
+  asset files (favicon.ico, OG PNG, logo SVG) yet; this page previews what those
+  would look like. Palette/type values sourced from docs/DESIGN-TOKENS.md.
+  Not wired into the Next.js app.
+-->
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function () {
+    var stored = null;
+    try { stored = localStorage.getItem('theme'); } catch (e) {}
+    var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: 'rgb(var(--color-bg) / <alpha-value>)',
+          'bg-elevated': 'rgb(var(--color-bg-elevated) / <alpha-value>)',
+          border: 'rgb(var(--color-border) / <alpha-value>)',
+          text: 'rgb(var(--color-text) / <alpha-value>)',
+          'text-muted': 'rgb(var(--color-text-muted) / <alpha-value>)',
+          'text-faint': 'rgb(var(--color-text-faint) / <alpha-value>)',
+          'accent-blue': 'rgb(var(--color-accent-blue) / <alpha-value>)',
+          'accent-cyan': 'rgb(var(--color-accent-cyan) / <alpha-value>)',
+          success: 'rgb(var(--color-success) / <alpha-value>)',
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+<style>
+  :root {
+    --color-bg: 5 5 5;
+    --color-bg-elevated: 11 11 13;
+    --color-border: 31 31 35;
+    --color-text: 245 245 247;
+    --color-text-muted: 154 154 162;
+    --color-text-faint: 92 92 100;
+    --color-accent-blue: 99 102 241;
+    --color-accent-cyan: 56 189 248;
+    --color-success: 52 211 153;
+  }
+  html[data-theme="light"] {
+    --color-bg: 255 255 255;
+    --color-bg-elevated: 244 244 246;
+    --color-border: 226 226 230;
+    --color-text: 10 10 12;
+    --color-text-muted: 82 82 91;
+    --color-text-faint: 139 139 147;
+    --color-accent-blue: 67 56 202;
+    --color-accent-cyan: 2 132 199;
+    --color-success: 5 150 105;
+  }
+  body { background: rgb(var(--color-bg)); }
+  .label { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; }
+  .swatch-mono { font-family: 'JetBrains Mono', monospace; }
+  html:not([data-theme="light"]) .icon-moon { display: none; }
+  html[data-theme="light"] .icon-sun { display: none; }
+  .checker-light { background-image: linear-gradient(45deg, #e5e5e5 25%, transparent 25%), linear-gradient(-45deg, #e5e5e5 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e5e5e5 75%), linear-gradient(-45deg, transparent 75%, #e5e5e5 75%); background-size: 16px 16px; background-position: 0 0, 0 8px, 8px -8px, -8px 0px; }
+</style>
+</head>
+<body class="bg-bg text-text font-sans antialiased">
+
+<header class="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur-md">
+  <div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
+    <div>
+      <p class="label text-xs text-accent-blue">BRAND KIT</p>
+      <p class="text-sm text-text-muted">Pravin K Portfolio — reference page, cross-references docs/DESIGN-TOKENS.md</p>
+    </div>
+    <button id="theme-toggle" type="button" aria-label="Toggle dark and light mode"
+      class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-border text-text-muted hover:text-text hover:border-accent-blue transition-colors shrink-0">
+      <svg class="icon-sun w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+      </svg>
+      <svg class="icon-moon w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-6 py-16 space-y-24">
+
+  <!-- ==================== LOGO / WORDMARK ==================== -->
+  <section id="logo">
+    <p class="label text-xs text-accent-blue mb-2">01 — LOGO &amp; WORDMARK</p>
+    <h2 class="text-2xl font-semibold mb-8">Identity</h2>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <!-- Wordmark -->
+      <div class="rounded-lg border border-border bg-bg-elevated p-10 flex items-center justify-center">
+        <span class="font-mono text-2xl tracking-[0.2em]">PRAVIN&nbsp;K</span>
+      </div>
+      <!-- Monogram mark -->
+      <div class="rounded-lg border border-border bg-bg-elevated p-10 flex items-center justify-center">
+        <svg width="72" height="72" viewBox="0 0 72 72" aria-label="PK monogram">
+          <defs>
+            <linearGradient id="markGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="rgb(var(--color-accent-blue))"/>
+              <stop offset="100%" stop-color="rgb(var(--color-accent-cyan))"/>
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="70" height="70" rx="18" fill="url(#markGradient)"/>
+          <text x="36" y="46" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="28" font-weight="600" fill="#050505">PK</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 text-sm mb-10">
+      <div>
+        <p class="label text-[11px] text-text-faint mb-2">CLEAR SPACE</p>
+        <p class="text-text-muted">Keep clear space around the mark equal to the height of the "P" in the wordmark on every side. Don't let other content crowd it.</p>
+      </div>
+      <div>
+        <p class="label text-[11px] text-text-faint mb-2">MINIMUM SIZE</p>
+        <p class="text-text-muted">Monogram: 24px minimum (favicon/avatar contexts). Wordmark: never smaller than 14px cap-height.</p>
+      </div>
+      <div>
+        <p class="label text-[11px] text-text-faint mb-2">USAGE</p>
+        <p class="text-text-muted">Monogram for avatars/favicons/tight spaces. Full wordmark for navbar, footer, and formal contexts.</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="rounded-lg border border-success/40 bg-success/5 p-6">
+        <p class="label text-[11px] text-success mb-3">DO</p>
+        <ul class="text-sm text-text-muted space-y-1.5 list-disc list-inside">
+          <li>Use the gradient mark on dark or light neutral backgrounds only</li>
+          <li>Maintain the monogram's 18px corner radius ratio when scaling</li>
+          <li>Use the mono wordmark tracking exactly as shown</li>
+        </ul>
+      </div>
+      <div class="rounded-lg border border-red-500/30 bg-red-500/5 p-6">
+        <p class="label text-[11px] text-red-400 mb-3">DON'T</p>
+        <ul class="text-sm text-text-muted space-y-1.5 list-disc list-inside">
+          <li>Don't place the mark on busy photography or clashing colors</li>
+          <li>Don't recolor the gradient or stretch the mark non-uniformly</li>
+          <li>Don't add a drop shadow or outline to the wordmark</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAVICON ==================== -->
+  <section id="favicon">
+    <p class="label text-xs text-accent-blue mb-2">02 — FAVICON</p>
+    <h2 class="text-2xl font-semibold mb-8">Browser Icon</h2>
+    <p class="text-text-muted text-sm mb-6">Derived from the monogram mark. Preview only — export real <span class="swatch-mono">favicon.ico</span> / PNG sizes (16, 32, 48, 180 for apple-touch-icon) from this shape when wiring into the Next.js app's <span class="swatch-mono">app/icon.tsx</span> or <span class="swatch-mono">public/favicon.ico</span>.</p>
+
+    <div class="flex flex-wrap items-end gap-8 mb-10">
+      <div class="text-center">
+        <svg width="16" height="16" viewBox="0 0 72 72" class="mx-auto mb-2 rounded"><rect width="72" height="72" rx="18" fill="url(#g16)"/><defs><linearGradient id="g16" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgb(var(--color-accent-blue))"/><stop offset="100%" stop-color="rgb(var(--color-accent-cyan))"/></linearGradient></defs></svg>
+        <p class="label text-[10px] text-text-faint">16×16</p>
+      </div>
+      <div class="text-center">
+        <svg width="32" height="32" viewBox="0 0 72 72" class="mx-auto mb-2 rounded"><rect width="72" height="72" rx="18" fill="url(#g32)"/><defs><linearGradient id="g32" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgb(var(--color-accent-blue))"/><stop offset="100%" stop-color="rgb(var(--color-accent-cyan))"/></linearGradient></defs></svg>
+        <p class="label text-[10px] text-text-faint">32×32</p>
+      </div>
+      <div class="text-center">
+        <svg width="48" height="48" viewBox="0 0 72 72" class="mx-auto mb-2 rounded-lg"><rect width="72" height="72" rx="18" fill="url(#g48)"/><text x="36" y="46" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="28" font-weight="600" fill="#050505">PK</text><defs><linearGradient id="g48" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgb(var(--color-accent-blue))"/><stop offset="100%" stop-color="rgb(var(--color-accent-cyan))"/></linearGradient></defs></svg>
+        <p class="label text-[10px] text-text-faint">48×48</p>
+      </div>
+      <div class="text-center">
+        <svg width="72" height="72" viewBox="0 0 72 72" class="mx-auto mb-2 rounded-xl"><rect width="72" height="72" rx="18" fill="url(#g180)"/><text x="36" y="46" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="28" font-weight="600" fill="#050505">PK</text><defs><linearGradient id="g180" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgb(var(--color-accent-blue))"/><stop offset="100%" stop-color="rgb(var(--color-accent-cyan))"/></linearGradient></defs></svg>
+        <p class="label text-[10px] text-text-faint">180×180 (apple-touch)</p>
+      </div>
+    </div>
+
+    <!-- Browser tab mockup -->
+    <div class="rounded-t-lg border border-border bg-bg-elevated max-w-sm">
+      <div class="flex items-center gap-2 px-3 py-2 border-b border-border">
+        <div class="flex gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-400/70"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-yellow-400/70"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-green-400/70"></span>
+        </div>
+        <div class="ml-2 flex items-center gap-1.5 rounded-t-md bg-bg px-3 py-1 text-xs text-text-muted">
+          <svg width="12" height="12" viewBox="0 0 72 72"><rect width="72" height="72" rx="18" fill="url(#gtab)"/><defs><linearGradient id="gtab" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgb(var(--color-accent-blue))"/><stop offset="100%" stop-color="rgb(var(--color-accent-cyan))"/></linearGradient></defs></svg>
+          <span>Pravin K — Portfolio</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SOCIAL SHARE (OG) IMAGE ==================== -->
+  <section id="og-image">
+    <p class="label text-xs text-accent-blue mb-2">03 — SOCIAL SHARE IMAGE</p>
+    <h2 class="text-2xl font-semibold mb-2">Open Graph Preview</h2>
+    <p class="text-text-muted text-sm mb-6">1200×630 — shown when the portfolio link is shared on social platforms/Slack/iMessage. Preview only, scaled to fit.</p>
+
+    <div class="w-full max-w-3xl aspect-[1200/630] rounded-lg border border-border overflow-hidden relative bg-bg">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 15% 20%, rgb(var(--color-accent-blue) / 0.18), transparent 45%), radial-gradient(circle at 85% 80%, rgb(var(--color-accent-cyan) / 0.16), transparent 45%);"></div>
+      <div class="absolute inset-0 flex flex-col items-start justify-center px-16">
+        <span class="font-mono text-sm tracking-[0.2em] text-accent-blue mb-4">PRAVIN K</span>
+        <h3 class="text-4xl md:text-5xl font-semibold leading-tight mb-3">Full Stack Developer</h3>
+        <p class="text-text-muted text-lg">Building fast, thoughtful products with Next.js &amp; TypeScript.</p>
+      </div>
+      <div class="absolute bottom-6 right-8 text-text-faint text-sm font-mono">pravin671231.dev</div>
+    </div>
+
+    <!-- Chat-share mockup -->
+    <div class="mt-6 max-w-md rounded-lg border border-border bg-bg-elevated overflow-hidden">
+      <div class="aspect-[1200/630] relative bg-bg">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 15% 20%, rgb(var(--color-accent-blue) / 0.18), transparent 45%), radial-gradient(circle at 85% 80%, rgb(var(--color-accent-cyan) / 0.16), transparent 45%);"></div>
+        <div class="absolute inset-0 flex flex-col items-start justify-center px-6">
+          <span class="font-mono text-[10px] tracking-[0.15em] text-accent-blue mb-1">PRAVIN K</span>
+          <h4 class="text-lg font-semibold leading-tight">Full Stack Developer</h4>
+        </div>
+      </div>
+      <div class="p-3">
+        <p class="text-xs text-text-faint font-mono">pravin671231.dev</p>
+        <p class="text-sm font-medium">Pravin K — Portfolio</p>
+        <p class="text-xs text-text-muted">Full Stack Developer building fast, thoughtful products.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== COLOR & TYPOGRAPHY SPECIMEN ==================== -->
+  <section id="specimen">
+    <p class="label text-xs text-accent-blue mb-2">04 — COLOR &amp; TYPOGRAPHY</p>
+    <h2 class="text-2xl font-semibold mb-8">Specimen</h2>
+
+    <p class="label text-[11px] text-text-faint mb-3">CURRENT THEME SWATCHES (toggle above to see both)</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-12">
+      <div class="rounded-md border border-border overflow-hidden">
+        <div class="h-16 bg-bg"></div>
+        <div class="p-2 text-xs swatch-mono">bg</div>
+      </div>
+      <div class="rounded-md border border-border overflow-hidden">
+        <div class="h-16 bg-bg-elevated"></div>
+        <div class="p-2 text-xs swatch-mono">bg-elevated</div>
+      </div>
+      <div class="rounded-md border border-border overflow-hidden">
+        <div class="h-16 bg-border"></div>
+        <div class="p-2 text-xs swatch-mono">border</div>
+      </div>
+      <div class="rounded-md border border-border overflow-hidden">
+        <div class="h-16" style="background: rgb(var(--color-text))"></div>
+        <div class="p-2 text-xs swatch-mono">text</div>
+      </div>
+      <div class="rounded-md border border-border overflow-hidden">
+        <div class="h-16 bg-text-muted"></div>
+        <div class="p-2 text-xs swatch-mono">text-muted</div>
+      </div>
+      <div class="rounded-md border border-border overflow-hidden">
+        <div class="h-16 bg-text-faint"></div>
+        <div class="p-2 text-xs swatch-mono">text-faint</div>
+      </div>
+      <div class="rounded-md border border-border overflow-hidden">
+        <div class="h-16 bg-accent-blue"></div>
+        <div class="p-2 text-xs swatch-mono">accent-blue</div>
+      </div>
+      <div class="rounded-md border border-border overflow-hidden">
+        <div class="h-16 bg-accent-cyan"></div>
+        <div class="p-2 text-xs swatch-mono">accent-cyan</div>
+      </div>
+      <div class="rounded-md border border-border overflow-hidden">
+        <div class="h-16 bg-success"></div>
+        <div class="p-2 text-xs swatch-mono">success</div>
+      </div>
+    </div>
+
+    <p class="label text-[11px] text-text-faint mb-3">TYPE SCALE</p>
+    <div class="space-y-6 border-t border-border pt-6">
+      <div class="flex items-baseline gap-4">
+        <span class="label text-[10px] text-text-faint w-24 shrink-0">display</span>
+        <span class="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[1.05]">Build it.</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="label text-[10px] text-text-faint w-24 shrink-0">h1</span>
+        <span class="text-[clamp(2rem,4vw,3rem)] font-semibold">Section heading</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="label text-[10px] text-text-faint w-24 shrink-0">h2</span>
+        <span class="text-2xl font-semibold">Card title</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="label text-[10px] text-text-faint w-24 shrink-0">body</span>
+        <span class="text-base text-text-muted">Body copy sits here at 1rem, 1.6 line-height, for comfortable reading.</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="label text-[10px] text-text-faint w-24 shrink-0">label</span>
+        <span class="label text-[13px] text-accent-blue">EYEBROW LABEL</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="label text-[10px] text-text-faint w-24 shrink-0">caption</span>
+        <span class="text-xs text-text-faint">Caption / meta text</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="label text-[10px] text-text-faint w-24 shrink-0">mono</span>
+        <span class="font-mono text-sm">const build = () =&gt; ship();</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="border-t border-border px-6 py-8 text-center text-xs text-text-faint">
+  Reference only — see <span class="swatch-mono">docs/DESIGN-TOKENS.md</span> for the underlying token spec.
+</footer>
+
+<script>
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    var html = document.documentElement;
+    var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+</script>
+</body>
+</html>
