@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* Tier 1: raw source variables. Dark is the default (no attribute needed);
+   light overrides everything under html[data-theme="light"]. Kept as plain,
+   un-namespaced vars so they aren't Tailwind utilities directly — only the
+   @theme inline block below is. This indirection is what keeps runtime
+   theme-switching working (see docs/DESIGN-TOKENS.md "Theming mechanism"). */
+:root {
+  --bg: #050505;
+  --bg-elevated: #0b0b0d;
+  --border: #1f1f23;
+  --text: #f5f5f7;
+  --text-muted: #9a9aa2;
+  --text-faint: #5c5c64;
+  --accent-blue: #6366f1;
+  --accent-cyan: #38bdf8;
+  --success: #34d399;
+  --grid-line: #ffffff;
+}
+
+html[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-elevated: #f4f4f6;
+  --border: #e2e2e6;
+  --text: #0a0a0c;
+  --text-muted: #52525b;
+  --text-faint: #8b8b93;
+  --accent-blue: #4338ca;
+  --accent-cyan: #0284c7;
+  --success: #059669;
+  --grid-line: #000000;
+}
+
+/* Tier 2: Tailwind v4 CSS-first theme. `inline` keeps each token a live
+   var() reference to Tier 1 (and to next/font's runtime-injected
+   --font-geist-sans/--font-geist-mono vars) instead of resolving to a
+   static value at build time — required for both the dark/light toggle
+   and next/font's variable-based fonts to work at runtime. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-success: var(--success);
+  --color-grid-line: var(--grid-line);
+
+  --font-sans: var(--font-geist-sans), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "JetBrains Mono", monospace;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --shadow-glow-sm: 0 0 24px -8px color-mix(in srgb, var(--accent-blue) 35%, transparent);
+  --shadow-glow-lg: 0 0 120px -20px color-mix(in srgb, var(--accent-cyan) 25%, transparent);
+
+  --text-display: clamp(2.5rem, 6vw, 5.5rem);
+  --text-display--line-height: 1.05;
+  --text-h1: clamp(2rem, 4vw, 3rem);
+  --text-h1--line-height: 1.1;
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 1.2;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-label: 0.8125rem;
+  --text-caption: 0.75rem;
+}
+
+/* Non-@theme tokens: spacing rhythm, motion durations, z-index. Plain CSS
+   custom properties (not Tailwind theme namespaces) since only a handful
+   of components consume each — used via arbitrary-value utilities or
+   inline style. Default Tailwind 4px spacing scale stays untouched. */
+:root {
+  --space-section-y: clamp(5rem, 12vw, 9rem);
+  --space-container-x: clamp(1.25rem, 5vw, 3rem);
+  --space-card-gap: 1.5rem;
+
+  --duration-fast: 0.2s;
+  --duration-base: 0.4s;
+  --duration-slow: 0.8s;
+
+  --z-nav: 40;
+  --z-command-palette: 50;
+  --z-cursor: 60;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+/* Shared by GlowBackground (Hero, Contact) — subtle grid, theme-aware via
+   var(--color-grid-line). Kept as plain CSS per the "plain CSS for
+   gradients/glows" tier in docs/SRS.md's tech stack. */
+.grid-pattern {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-grid-line) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-grid-line) 4%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Applied to <body> only while CustomCursor is active (desktop, motion
+   enabled) — never a blanket rule, so touch/reduced-motion users always
+   keep their native cursor. */
+.cursor-none-desktop,
+.cursor-none-desktop * {
+  cursor: none;
+}

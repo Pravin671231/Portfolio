@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -25,8 +25,19 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Type-check
-        run: npx tsc --noEmit
-
       - name: Build
         run: npm run build
+
+      - name: Verify Tailwind CSS actually compiled
+        # A missing/broken postcss.config.mjs makes Turbopack silently pass
+        # globals.css through unprocessed (build still exits 0, only a
+        # low-visibility warning is logged) — zero Tailwind utility classes
+        # get generated. Fail loudly instead of relying on that warning.
+        run: |
+          if ! find .next/static -name '*.css' -exec grep -l '\.bg-bg' {} + | grep -q .; then
+            echo "::error::Tailwind utility classes not found in compiled CSS — check postcss.config.mjs is present and @tailwindcss/postcss is running."
+            exit 1
+          fi
+
+      - name: Type-check
+        run: npx tsc --noEmit
