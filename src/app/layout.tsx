@@ -5,6 +5,7 @@ import { ThemeProvider, THEME_INIT_SCRIPT } from "@/context/ThemeContext";
 import { CursorProvider } from "@/context/CursorContext";
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { CommandPalette } from "@/components/ui/CommandPalette";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <CursorProvider>
             <SmoothScrollProvider>
               <CustomCursor />
+              <CommandPalette />
               <Navbar />
               {children}
               <Footer />

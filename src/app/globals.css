@@ -85,6 +85,7 @@ html[data-theme="light"] {
   --duration-fast: 0.2s;
   --duration-base: 0.4s;
   --duration-slow: 0.8s;
+  --duration-float: 8s;
 
   --z-nav: 40;
   --z-command-palette: 50;
@@ -113,4 +114,26 @@ body {
 .cursor-none-desktop,
 .cursor-none-desktop * {
   cursor: none;
+}
+
+/* FloatingCode decorative glyphs — plain CSS loop, no JS animation library.
+   Reduced-motion users get the glyphs statically in place, not removed. */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+.animate-float {
+  animation: float var(--duration-float) ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float {
+    animation: none;
+  }
 }

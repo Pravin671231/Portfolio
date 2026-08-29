@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import { AnimatedText } from "@/components/ui/AnimatedText";
+import { FloatingCode } from "@/components/ui/FloatingCode";
 import { GlowBackground } from "@/components/ui/GlowBackground";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -14,6 +15,7 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-(--space-container-x)">
       <GlowBackground />
+      <FloatingCode />
 
       <div className="relative max-w-3xl text-center">
         <p className="mb-6 font-mono text-xs uppercase tracking-[0.08em] text-accent-blue">

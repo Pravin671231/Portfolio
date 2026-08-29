@@ -1,3 +1,4 @@
+import { FloatingCode } from "@/components/ui/FloatingCode";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 const SKILLS = ["React", "Next.js", "TypeScript", "Node.js"];
@@ -5,6 +6,7 @@ const SKILLS = ["React", "Next.js", "TypeScript", "Node.js"];
 export function About() {
   return (
     <section id="about" className="relative px-(--space-container-x) py-(--space-section-y)">
+      <FloatingCode />
       <div className="mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-2">
         <ScrollReveal delay={0}>
           <div className="flex aspect-4/5 items-center justify-center rounded-lg border border-border bg-bg-elevated">
