@@ -3,6 +3,7 @@
 import { animate, motion, useInView, useMotionValue, type Variants } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { useCursor } from "@/context/CursorContext";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { fetchGithubStats } from "@/lib/github";
 
 const GITHUB_USER = "Pravin671231";
@@ -40,22 +41,25 @@ function CountUp({ value, label }: { value: number; label: string }) {
   const ref = useRef<HTMLParagraphElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
   const motionValue = useMotionValue(0);
+  const prefersReducedMotion = useReducedMotion();
   const [display, setDisplay] = useState("00");
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || prefersReducedMotion) return;
     const controls = animate(motionValue, value, {
       duration: 1.2,
       ease: "easeOut",
       onUpdate: (v) => setDisplay(String(Math.round(v)).padStart(2, "0")),
     });
     return () => controls.stop();
-  }, [inView, value, motionValue]);
+  }, [inView, value, motionValue, prefersReducedMotion]);
+
+  const shown = inView && prefersReducedMotion ? String(value).padStart(2, "0") : display;
 
   return (
     <div>
       <p ref={ref} className="font-mono text-4xl font-semibold">
-        {display}
+        {shown}
       </p>
       <p className="mt-2 text-sm text-text-muted">{label}</p>
     </div>
@@ -65,6 +69,7 @@ function CountUp({ value, label }: { value: number; label: string }) {
 export function Github() {
   const [stats, setStats] = useState({ repos: 0, followers: 0, totalStars: 0 });
   const { setCursor } = useCursor();
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     fetchGithubStats().then(setStats);
@@ -95,8 +100,8 @@ export function Github() {
         <motion.div
           className="mx-auto grid max-w-xl gap-1"
           style={{ gridTemplateColumns: "repeat(20, minmax(0,1fr))" }}
-          initial="hidden"
-          whileInView="visible"
+          initial={prefersReducedMotion ? "visible" : "hidden"}
+          whileInView={prefersReducedMotion ? undefined : "visible"}
           viewport={{ once: true, amount: 0.3 }}
           variants={gridContainerVariants}
         >
