@@ -19,9 +19,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const TITLE = "Pravin K — Full Stack Developer";
+const DESCRIPTION =
+  "Portfolio of Pravin K, a full stack developer building fast, thoughtful products with Next.js, TypeScript & Node.js.";
+
 export const metadata: Metadata = {
-  title: "Pravin K — Full Stack Developer",
-  description: "Portfolio of Pravin K, a full stack developer building fast, thoughtful products with Next.js, TypeScript & Node.js.",
+  metadataBase: new URL("https://pravin671231.dev"),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
+    siteName: "Pravin K — Portfolio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
