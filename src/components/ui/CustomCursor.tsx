@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useSpring } from "motion/react";
 import { useEffect } from "react";
 import { useCursor } from "@/context/CursorContext";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useMousePosition } from "@/hooks/useMousePosition";
+import { useMousePositionValue } from "@/hooks/useMousePositionValue";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const LABELS: Record<string, string> = {
@@ -19,7 +19,7 @@ export function CustomCursor() {
   const prefersReducedMotion = useReducedMotion();
   const disabled = isTouch || prefersReducedMotion;
 
-  const { x, y } = useMousePosition(!disabled);
+  const { x, y } = useMousePositionValue(!disabled);
   const springX = useSpring(x, { stiffness: 500, damping: 40 });
   const springY = useSpring(y, { stiffness: 500, damping: 40 });
 
@@ -35,6 +35,7 @@ export function CustomCursor() {
 
   return (
     <motion.div
+      data-testid="custom-cursor"
       className="pointer-events-none fixed left-0 top-0"
       style={{ x: springX, y: springY, zIndex: "var(--z-cursor)" }}
     >
